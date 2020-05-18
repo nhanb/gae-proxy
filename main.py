@@ -17,10 +17,15 @@ proxiable_methods = {
 def proxy():
     req = request.json
 
+    fields = ("method", "password", "url", "body")
+    missing_fields = [f for f in fields if f not in req]
+    if missing_fields:
+        return HTTPResponse(status=400, body=f"Missing fields: {missing_fields}")
+
     if req["method"] not in proxiable_methods:
         return HTTPResponse(status=400, body="We serve get/post only!")
 
-    if req["password"] != PASSWORD:
+    if req.get("password") != PASSWORD:
         return HTTPResponse(status=400, body="Get off my lawn!")
 
     requests_func = proxiable_methods[req["method"]]
