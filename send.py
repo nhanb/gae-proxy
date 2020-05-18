@@ -1,8 +1,14 @@
+import os
+
 import requests
 
 """
 Lazy quick test script
 """
+
+PASSWORD = os.environ.get("GAEPROXY_PASSWORD", "foo")
+print(PASSWORD)
+
 
 resp = requests.post(
     "https://nhansproxy.df.r.appspot.com/proxy",
@@ -11,6 +17,7 @@ resp = requests.post(
         "method": "get",
         "body": None,
         "headers": {"Foo-Bar": "ehhhh"},
+        "password": PASSWORD,
     },
 )
 
