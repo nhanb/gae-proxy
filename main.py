@@ -1,5 +1,10 @@
+import os
+
 import requests
 from bottle import HTTPResponse, request, route, run
+
+# GAE recommended
+PORT = os.environ.get("PORT", 8080)
 
 proxiable_methods = {
     "get": requests.get,
@@ -24,4 +29,4 @@ def proxy():
     return HTTPResponse(body=resp.text, status=resp.status_code)
 
 
-run(host="0.0.0.0", port=8080)
+run(host="0.0.0.0", port=PORT)

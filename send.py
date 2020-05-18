@@ -5,7 +5,7 @@ Lazy quick test script
 """
 
 resp = requests.post(
-    "https://nhansproxy.df.r.appspot.com",
+    "https://nhansproxy.df.r.appspot.com/proxy",
     json={
         "url": "https://httpbin.org/get",
         "method": "get",
