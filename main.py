@@ -5,6 +5,7 @@ from bottle import HTTPResponse, request, route, run
 
 # GAE recommended
 PORT = os.environ.get("PORT", 8080)
+PASSWORD = os.environ.get("GAEPROXY_PASSWORD", "")
 
 proxiable_methods = {
     "get": requests.get,
@@ -15,7 +16,13 @@ proxiable_methods = {
 @route("/proxy", method="POST")
 def proxy():
     req = request.json
-    assert req["method"] in proxiable_methods
+
+    if req["method"] not in proxiable_methods:
+        return HTTPResponse(status=400, body="We serve get/post only!")
+
+    if req["password"] != PASSWORD:
+        return HTTPResponse(status=400, body="Get off my lawn!")
+
     requests_func = proxiable_methods[req["method"]]
     requests_kwargs = {"url": req["url"], "headers": req["headers"]}
     if req["method"] == "post":
