@@ -1,7 +1,7 @@
 import os
 
 import requests
-from bottle import HTTPResponse, request, route, run
+from bottle import HTTPResponse, default_app, request, route, run
 
 # GAE recommended
 PORT = os.environ.get("PORT", 8080)
@@ -41,4 +41,7 @@ def proxy():
     return HTTPResponse(body=resp.text, status=resp.status_code)
 
 
-run(host="0.0.0.0", port=PORT)
+app = default_app()
+
+if __name__ == "__main__":
+    run(host="localhost", port=PORT)
