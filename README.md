@@ -7,8 +7,7 @@ while plain HTTP is easy, HTTPS requires actual tcp tunnelling which I'm not
 really up for at the moment (is that even possible on GAE standard
 evironment?).
 
-So I devised my own scheme where every param is defined in a POST json body.
-Dumbest thing that works right?
+So I devised my own "scheme". Dumbest thing that works right?
 
 # Server
 
@@ -16,11 +15,11 @@ Create an `envars.yaml` file to store secret password:
 
 ```yaml
 env_variables:
-  GAEPROXY_PASSWORD: "long long string"
+  GAEPROXY_KEY: "long long string"
 ```
 
 Then just `gcloud app deploy`.
 
 # Use
 
-See **send.py**. It's pretty straightforward.
+See comments in **app.py**.

@@ -1,5 +1,5 @@
-runtime: python37
-entrypoint: gunicorn -b :$PORT --workers=5 main:app
+runtime: python39
+entrypoint: gunicorn -b :$PORT --workers=5 app:app
 
 handlers:
   - url: /.*
