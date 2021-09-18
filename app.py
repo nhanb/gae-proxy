@@ -65,8 +65,8 @@ def hello_world(path):
     target_resp = send(target_url, headers=target_headers)
 
     resp_headers = dict(target_resp.headers)
-    resp_headers.pop("Content-Encoding", None)
-    resp_headers.pop("Transfer-Encoding", None)
+    resp_headers.pop("content-encoding", None)
+    resp_headers.pop("transfer-encoding", None)
 
     return Response(
         response=target_resp.content,
