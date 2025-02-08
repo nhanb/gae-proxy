@@ -14,6 +14,7 @@ To deploy:
     $ export GAEPROXY_KEY='my-secret-proxy-key'
     $ gcloud app deploy
 """
+
 import os
 
 import cloudscraper
@@ -61,8 +62,10 @@ def hello_world(path):
     target_path = "/".join(request.full_path.split("/")[1:])
     target_url = f"{target_scheme}://{target_host}/{target_path}"
 
+    post_form = {key: val for key, val in request.form.items()} or None
+
     send = getattr(http, request.method.lower())
-    target_resp = send(target_url, headers=target_headers)
+    target_resp = send(target_url, headers=target_headers, data=post_form)
 
     resp_headers = dict(target_resp.headers)
     resp_headers.pop("Content-Encoding", None)
